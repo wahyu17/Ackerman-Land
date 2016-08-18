@@ -1480,6 +1480,8 @@
 		qcom,use-sw-aes-xts-algo;
 		qcom,use-sw-aes-ccm-algo;
 		qcom,use-sw-ahash-algo;
+		qcom,use-sw-hmac-algo;
+		qcom,use-sw-aead-algo;
 		qcom,ce-opp-freq = <100000000>;
 	};
 
