@@ -170,3 +170,11 @@ obj-$(CONFIG_ESOC)		+= esoc/
 obj-$(CONFIG_BIF)		+= bif/
 
 obj-$(CONFIG_SENSORS_SSC)	+= sensors/
+<<<<<<< HEAD
+=======
+
+# <t-base drivers
+obj-$(CONFIG_MOBICORE_DRIVER)	+= gud/
+
+obj-$(CONFIG_FINGERPRINT)       += fingerprint/
+>>>>>>> ee3f64a... Kernel: Xiaomi kernel changes for Redme 3S

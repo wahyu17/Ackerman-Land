@@ -68,6 +68,7 @@
 &i2c_3 {
 	status = "disabled";
 };
+<<<<<<< HEAD:arch/arm/boot/dts/qcom/apq8009w-swoctp.dtsi
 
 /* Charger/FG configuration */
 &pm8916_chg {
@@ -165,3 +166,5 @@
 		qcom,fg-adc_tm = <&pm8916_adc_tm>;
 	};
 };
+=======
+>>>>>>> ee3f64a... Kernel: Xiaomi kernel changes for Redme 3S:arch/arm/boot/dts/qcom/msm8909w-pm8916-mtp-ext-chg-fg.dtsi

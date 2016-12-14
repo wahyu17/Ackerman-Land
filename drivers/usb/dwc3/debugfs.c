@@ -2,6 +2,7 @@
  * debugfs.c - DesignWare USB3 DRD Controller DebugFS file
  *
  * Copyright (C) 2010-2011 Texas Instruments Incorporated - http://www.ti.com
+ * Copyright (C) 2016 XiaoMi, Inc.
  *
  * Authors: Felipe Balbi <balbi@ti.com>,
  *	    Sebastian Andrzej Siewior <bigeasy@linutronix.de>
@@ -630,7 +631,11 @@ static ssize_t dwc3_store_ep_num(struct file *file, const char __user *ubuf,
 {
 	struct seq_file		*s = file->private_data;
 	struct dwc3		*dwc = s->private;
+<<<<<<< HEAD
 	char			kbuf[10] = {0};
+=======
+	char			kbuf[10];
+>>>>>>> ee3f64a... Kernel: Xiaomi kernel changes for Redme 3S
 	unsigned int		num, dir, temp;
 	unsigned long		flags;
 
@@ -645,7 +650,11 @@ static ssize_t dwc3_store_ep_num(struct file *file, const char __user *ubuf,
 
 	temp = (num << 1) + dir;
 	if (temp >= (dwc->num_in_eps + dwc->num_out_eps) ||
+<<<<<<< HEAD
 					temp >= DWC3_ENDPOINTS_NUM)
+=======
+	    temp >= DWC3_ENDPOINTS_NUM)
+>>>>>>> ee3f64a... Kernel: Xiaomi kernel changes for Redme 3S
 		return -EINVAL;
 
 	spin_lock_irqsave(&dwc->lock, flags);

@@ -22,6 +22,7 @@
 	qcom,board-id= <8 1>;
 };
 
+<<<<<<< HEAD:arch/arm/boot/dts/qcom/msm8953-ext-codec-mtp.dts
 &int_codec {
 	status = "disabled";
 };
@@ -50,6 +51,8 @@
 	status = "disabled";
 };
 
+=======
+>>>>>>> ee3f64a... Kernel: Xiaomi kernel changes for Redme 3S:arch/arm/boot/dts/qcom/msmtitanium-ext-codec-mtp.dts
 &slim_msm {
 	status = "okay";
 };

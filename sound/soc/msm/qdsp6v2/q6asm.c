@@ -1308,6 +1308,10 @@ int q6asm_audio_client_buf_alloc_contiguous(unsigned int dir,
 		mutex_unlock(&ac->cmd_lock);
 		goto fail;
 	}
+<<<<<<< HEAD
+=======
+
+>>>>>>> ee3f64a... Kernel: Xiaomi kernel changes for Redme 3S
 	bytes_to_alloc = bufsz * bufcnt;
 
 	/* The size to allocate should be multiple of 4K bytes */

@@ -13,8 +13,14 @@
 
 /dts-v1/;
 
+<<<<<<< HEAD:arch/arm/boot/dts/qcom/msm8953-mtp.dts
 #include "msm8953.dtsi"
 #include "msm8953-mtp.dtsi"
+=======
+#include "msmtitanium.dtsi"
+#include "msmtitanium-mtp.dtsi"
+#include "msmtitanium-audio-mtp.dtsi"
+>>>>>>> ee3f64a... Kernel: Xiaomi kernel changes for Redme 3S:arch/arm/boot/dts/qcom/msmtitanium-mtp.dts
 
 / {
 	model = "Qualcomm Technologies, Inc. MSM8953 MTP";

@@ -2,7 +2,12 @@
  *
  * Copyright (C) 2008 Google, Inc.
  * Author: Brian Swetland <swetland@google.com>
+<<<<<<< HEAD
  * Copyright (c) 2009-2017, The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2009-2016, The Linux Foundation. All rights reserved.
+ * Copyright (C) 2016 XiaoMi, Inc.
+>>>>>>> ee3f64a... Kernel: Xiaomi kernel changes for Redme 3S
  *
  * This software is licensed under the terms of the GNU General Public
  * License version 2, as published by the Free Software Foundation, and
@@ -120,9 +125,10 @@ enum msm_usb_phy_type {
 	QUSB_ULPI_PHY,
 };
 
-#define IDEV_CHG_MAX	1500
+#define IDEV_CHG_MAX	2000
 #define IUNIT		100
 #define IDEV_HVDCP_CHG_MAX	1800
+#define IDEV_CHG_MIN 500
 
 /**
  * Different states involved in USB charger detection.

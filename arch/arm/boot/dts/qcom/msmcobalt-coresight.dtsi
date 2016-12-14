@@ -129,14 +129,6 @@
 						<&funnel_in0_out_funnel_merg>;
 				};
 			};
-			port@2 {
-				reg = <1>;
-				funnel_merg_in_funnel_in1:endpoint {
-					slave-mode;
-					remote-endpoint =
-						<&funnel_in1_out_funnel_merg>;
-				};
-			};
 		};
 	};
 
@@ -190,6 +182,7 @@
 		};
 	};
 
+<<<<<<< HEAD
 	funnel_in1: funnel@6042000 {
 		compatible = "arm,primecell";
 		arm,primecell-periphid = <0x0003b908>;
@@ -383,6 +376,8 @@
 		};
 	};
 
+=======
+>>>>>>> ee3f64a... Kernel: Xiaomi kernel changes for Redme 3S
 	stm: stm@6002000 {
 		compatible = "arm,primecell";
 		arm,primecell-periphid = <0x0003b962>;
@@ -403,6 +398,7 @@
 			};
 		};
 	};
+<<<<<<< HEAD
 
 	etm0: etm@7840000 {
 		compatible = "arm,primecell";
@@ -1364,4 +1360,6 @@
 			};
 		};
 	};
+=======
+>>>>>>> ee3f64a... Kernel: Xiaomi kernel changes for Redme 3S
 };

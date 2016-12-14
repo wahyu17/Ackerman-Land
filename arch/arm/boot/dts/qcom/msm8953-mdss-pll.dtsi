@@ -28,11 +28,14 @@
 		clock-names = "iface_clk";
 		clock-rate = <0>;
 
+<<<<<<< HEAD:arch/arm/boot/dts/qcom/msm8953-mdss-pll.dtsi
 		qcom,dsi-pll-ssc-en;
 		qcom,dsi-pll-ssc-mode = "down-spread";
 		/* Memory region for passing dynamic refresh pll codes */
 		memory-region = <&dfps_data_mem>;
 
+=======
+>>>>>>> ee3f64a... Kernel: Xiaomi kernel changes for Redme 3S:arch/arm/boot/dts/qcom/msmtitanium-mdss-pll.dtsi
 		qcom,platform-supply-entries {
 			#address-cells = <1>;
 			#size-cells = <0>;

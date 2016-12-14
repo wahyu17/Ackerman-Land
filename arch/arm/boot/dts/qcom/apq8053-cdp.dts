@@ -13,8 +13,14 @@
 
 /dts-v1/;
 
+<<<<<<< HEAD:arch/arm/boot/dts/qcom/apq8053-cdp.dts
 #include "apq8053.dtsi"
 #include "msm8953-cdp.dtsi"
+=======
+#include "msmtitanium.dtsi"
+#include "msmtitanium-cdp.dtsi"
+#include "msmtitanium-audio-cdp.dtsi"
+>>>>>>> ee3f64a... Kernel: Xiaomi kernel changes for Redme 3S:arch/arm/boot/dts/qcom/msmtitanium-cdp.dts
 
 / {
 	model = "Qualcomm Technologies, Inc. APQ8053 CDP";

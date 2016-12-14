@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 /* Copyright (c) 2008-2017, The Linux Foundation. All rights reserved.
+=======
+/* Copyright (c) 2008-2016, The Linux Foundation. All rights reserved.
+ * Copyright (C) 2016 XiaoMi, Inc.
+>>>>>>> ee3f64a... Kernel: Xiaomi kernel changes for Redme 3S
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -367,9 +372,32 @@ static void kgsl_mem_entry_commit_process(struct kgsl_mem_entry *entry)
 	spin_unlock(&entry->priv->mem_lock);
 }
 
+<<<<<<< HEAD
 /*
  * Attach the memory object to a process by (possibly) getting a GPU address and
  * (possibly) mapping it
+=======
+static void kgsl_mem_entry_commit_process(struct kgsl_mem_entry *entry)
+{
+	if (!entry)
+		return;
+
+	spin_lock(&entry->priv->mem_lock);
+	idr_replace(&entry->priv->mem_idr, entry, entry->id);
+	spin_unlock(&entry->priv->mem_lock);
+}
+
+/**
+ * kgsl_mem_entry_attach_process - Attach a mem_entry to its owner process
+ * @entry: the memory entry
+ * @process: the owner process
+ *
+ * Attach a newly created mem_entry to its owner process so that
+ * it can be found later. The mem_entry will be added to mem_idr and have
+ * its 'id' field assigned.
+ *
+ * @returns - 0 on success or error code on failure.
+>>>>>>> ee3f64a... Kernel: Xiaomi kernel changes for Redme 3S
  */
 static int kgsl_mem_entry_attach_process(struct kgsl_device *device,
 		struct kgsl_process_private *process,
@@ -389,7 +417,10 @@ static int kgsl_mem_entry_attach_process(struct kgsl_device *device,
 
 	idr_preload(GFP_KERNEL);
 	spin_lock(&process->mem_lock);
+<<<<<<< HEAD
 	/* Allocate the ID but don't attach the pointer just yet */
+=======
+>>>>>>> ee3f64a... Kernel: Xiaomi kernel changes for Redme 3S
 	id = idr_alloc(&process->mem_idr, NULL, 1, 0, GFP_NOWAIT);
 	spin_unlock(&process->mem_lock);
 	idr_preload_end();
@@ -1924,8 +1955,12 @@ static inline int _check_region(unsigned long start, unsigned long size,
 	return (end > len);
 }
 
+<<<<<<< HEAD
 static int check_vma_flags(struct vm_area_struct *vma,
 		unsigned int flags)
+=======
+static int check_vma_flags(struct vm_area_struct *vma, unsigned int flags)
+>>>>>>> ee3f64a... Kernel: Xiaomi kernel changes for Redme 3S
 {
 	unsigned long flags_requested = (VM_READ | VM_WRITE);
 
@@ -2095,7 +2130,10 @@ static int kgsl_setup_dmabuf_useraddr(struct kgsl_device *device,
 			up_read(&current->mm->mmap_sem);
 			return ret;
 		}
+<<<<<<< HEAD
 
+=======
+>>>>>>> ee3f64a... Kernel: Xiaomi kernel changes for Redme 3S
 		/*
 		 * Check to see that this isn't our own memory that we have
 		 * already mapped
@@ -2301,6 +2339,7 @@ long kgsl_ioctl_gpuobj_import(struct kgsl_device_private *dev_priv,
 		entry->memdesc.size);
 
 	trace_kgsl_mem_map(entry, fd);
+	kgsl_mem_entry_commit_process(entry);
 
 	kgsl_mem_entry_commit_process(entry);
 
@@ -2610,11 +2649,15 @@ long kgsl_ioctl_map_user_mem(struct kgsl_device_private *dev_priv,
 			kgsl_memdesc_usermem_type(&entry->memdesc), param->len);
 
 	trace_kgsl_mem_map(entry, param->fd);
+<<<<<<< HEAD
 
 	kgsl_mem_entry_commit_process(entry);
 
 	/* put the extra refcount for kgsl_mem_entry_create() */
 	kgsl_mem_entry_put(entry);
+=======
+	kgsl_mem_entry_commit_process(entry);
+>>>>>>> ee3f64a... Kernel: Xiaomi kernel changes for Redme 3S
 	return result;
 
 error_attach:
@@ -3005,7 +3048,10 @@ static struct kgsl_mem_entry *gpumem_alloc_entry(
 			kgsl_memdesc_usermem_type(&entry->memdesc),
 			entry->memdesc.size);
 	trace_kgsl_mem_alloc(entry);
+<<<<<<< HEAD
 
+=======
+>>>>>>> ee3f64a... Kernel: Xiaomi kernel changes for Redme 3S
 	kgsl_mem_entry_commit_process(entry);
 	return entry;
 err:

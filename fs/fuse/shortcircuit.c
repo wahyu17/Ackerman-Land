@@ -1,5 +1,9 @@
 /*
  * Copyright (c) 2015-2016, The Linux Foundation. All rights reserved.
+<<<<<<< HEAD
+=======
+ * Copyright (C) 2016 XiaoMi, Inc.
+>>>>>>> ee3f64a... Kernel: Xiaomi kernel changes for Redme 3S
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -59,12 +63,18 @@ static ssize_t fuse_shortcircuit_read_write_iter(struct kiocb *iocb,
 	struct file *fuse_file, *lower_file;
 	struct inode *fuse_inode, *lower_inode;
 	struct fuse_conn *fc;
+<<<<<<< HEAD
 
+=======
+>>>>>>> ee3f64a... Kernel: Xiaomi kernel changes for Redme 3S
 	ff = iocb->ki_filp->private_data;
 	fuse_file = iocb->ki_filp;
 	lower_file = ff->rw_lower_file;
 	fc = ff->fc;
+<<<<<<< HEAD
 
+=======
+>>>>>>> ee3f64a... Kernel: Xiaomi kernel changes for Redme 3S
 	/* lock lower file to prevent it from being released */
 	get_file(lower_file);
 	iocb->ki_filp = lower_file;

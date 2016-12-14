@@ -9,6 +9,7 @@
  *
  *  Copyright (C) 2002-2003  Maxim Krasnyansky <maxk@qualcomm.com>
  *  Copyright (C) 2004-2006  Marcel Holtmann <marcel@holtmann.org>
+ *  Copyright (C) 2016 XiaoMi, Inc.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License version 2
@@ -208,9 +209,17 @@ static int radio_hci_smd_register_dev(struct radio_data *hsmd)
 
 static void radio_hci_smd_deregister(void)
 {
+<<<<<<< HEAD
 	FMDBG("");
 
 	radio_hci_unregister_dev();
+=======
+	/* may deregistered by hcismd_fm_set_enable already */
+	if (hs.hdev == NULL)
+		return;
+
+	radio_hci_unregister_dev(hs.hdev);
+>>>>>>> ee3f64a... Kernel: Xiaomi kernel changes for Redme 3S
 	kfree(hs.hdev);
 	hs.hdev = NULL;
 

@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 /* Copyright (c) 2007-2016, The Linux Foundation. All rights reserved.
+=======
+/* Copyright (c) 2007-2015, The Linux Foundation. All rights reserved.
+ * Copyright (C) 2016 XiaoMi, Inc.
+>>>>>>> ee3f64a... Kernel: Xiaomi kernel changes for Redme 3S
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -248,8 +253,13 @@ static int mdss_smmu_detach_v2(struct mdss_data_type *mdata)
 		if (mdss_smmu && mdss_smmu->dev && !mdss_smmu->handoff_pending)
 			mdss_smmu_enable_power(mdss_smmu, false);
 	}
+<<<<<<< HEAD
 	mutex_unlock(&mdp_iommu_lock);
 
+=======
+
+	mutex_unlock(&mdp_iommu_lock);
+>>>>>>> ee3f64a... Kernel: Xiaomi kernel changes for Redme 3S
 	return 0;
 }
 

@@ -493,6 +493,7 @@
 		dmas = <&dma_blsp1 6 64 0x20000020 0x20>,
 			<&dma_blsp1 7 32 0x20000020 0x20>;
 		dma-names = "tx", "rx";
+<<<<<<< HEAD:arch/arm/boot/dts/qcom/msm8917.dtsi
 
 		pericom-type-c@1d {
 			compatible = "pericom,usb-type-c";
@@ -504,6 +505,8 @@
 			pinctrl-names = "default";
 			pinctrl-0 = <&usbc_int_default>;
 		};
+=======
+>>>>>>> ee3f64a... Kernel: Xiaomi kernel changes for Redme 3S:arch/arm/boot/dts/qcom/msmgold.dtsi
 	};
 
 	i2c_3: i2c@78b7000 { /* BLSP1 QUP3 */

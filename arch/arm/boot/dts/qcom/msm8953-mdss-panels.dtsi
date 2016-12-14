@@ -20,7 +20,6 @@
 #include "dsi-adv7533-720p.dtsi"
 #include "dsi-panel-r69006-1080p-video.dtsi"
 #include "dsi-panel-r69006-1080p-cmd.dtsi"
-#include "dsi-panel-truly-wuxga-video.dtsi"
 
 &soc {
 	dsi_panel_pwr_supply: dsi_panel_pwr_supply {
@@ -113,6 +112,7 @@
 		1e 1b 04 06 02 03 04 a0
 		1e 0e 04 05 02 03 04 a0];
 };
+<<<<<<< HEAD:arch/arm/boot/dts/qcom/msm8953-mdss-panels.dtsi
 
 &dsi_truly_wuxga_vid {
 	qcom,mdss-dsi-panel-timings-phy-v2 = [24 1f 08 09 05 03 04 a0
@@ -121,3 +121,5 @@
 		24 1f 08 09 05 03 04 a0
 		24 1c 08 09 05 03 04 a0];
 };
+=======
+>>>>>>> ee3f64a... Kernel: Xiaomi kernel changes for Redme 3S:arch/arm/boot/dts/qcom/msmtitanium-mdss-panels.dtsi

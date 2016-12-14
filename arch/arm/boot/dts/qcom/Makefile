@@ -9,8 +9,11 @@ dtb-$(CONFIG_ARCH_MSM8996) += msm8996-v2-pmi8994-cdp.dtb \
 	msm8996-v2-fluid.dtb \
 	msm8996-v2-liquid.dtb \
 	msm8996-v2-dtp.dtb \
+<<<<<<< HEAD
 	msm8996-v3-auto-cdp.dtb \
 	msm8996-v3-auto-adp.dtb \
+=======
+>>>>>>> ee3f64a... Kernel: Xiaomi kernel changes for Redme 3S
 	msm8996-v3-pmi8994-cdp.dtb \
 	msm8996-v3-pmi8994-mtp.dtb \
 	msm8996-v3-pmi8994-pmk8001-cdp.dtb \
@@ -171,8 +174,10 @@ dtb-$(CONFIG_ARCH_MSM8937) += msm8937-rumi.dtb \
 	apq8037-pmi8950-cdp.dtb \
 	apq8037-pmi8937-cdp.dtb \
 	apq8037-pmi8950-mtp.dtb \
-	apq8037-pmi8937-mtp.dtb
+	apq8037-pmi8937-mtp.dtb \
+	msm8937-pmi8950-qrd-wt88537_64.dtb
 
+<<<<<<< HEAD
 dtb-$(CONFIG_ARCH_MSM8917) += msm8917-rumi.dtb \
 	apq8017-pmi8937-cdp.dtb \
 	apq8017-pmi8937-mtp.dtb \
@@ -229,6 +234,32 @@ dtb-$(CONFIG_ARCH_SDM450) += sdm450-rcm.dtb \
 	sdm450-cdp.dtb \
 	sdm450-mtp.dtb \
 	sdm450-qrd.dtb
+=======
+dtb-$(CONFIG_ARCH_MSMGOLD) += msmgold-rumi.dtb \
+	apqgold-pmi8937-cdp.dtb \
+	apqgold-pmi8937-mtp.dtb \
+	apqgold-pmi8950-cdp.dtb \
+	apqgold-pmi8950-mtp.dtb \
+	msmgold-pmi8937-cdp.dtb \
+	msmgold-pmi8937-mtp.dtb \
+	msmgold-pmi8950-cdp.dtb \
+	msmgold-pmi8950-ext-codec-cdp.dtb \
+	msmgold-pmi8950-mtp.dtb \
+	msmgold-pmi8937-rcm.dtb \
+	msmgold-pmi8950-rcm.dtb \
+	msmgold-pmi8937-qrd-sku5.dtb
+
+dtb-$(CONFIG_ARCH_MSMTITANIUM) += msmtitanium-sim.dtb \
+	msmtitanium-rumi.dtb \
+	msmtitanium-cdp.dtb \
+	msmtitanium-mtp.dtb \
+	msmtitanium-ext-codec-mtp.dtb \
+	msmtitanium-qrd-sku3.dtb \
+	msmtitanium-rcm.dtb \
+	msmtitanium-ext-codec-rcm.dtb \
+	apqtitanium-cdp.dtb \
+	apqtitanium-mtp.dtb
+>>>>>>> ee3f64a... Kernel: Xiaomi kernel changes for Redme 3S
 
 dtb-$(CONFIG_ARCH_MDM9607) += mdm9607-rumi.dtb \
 	mdm9607-cdp.dtb \

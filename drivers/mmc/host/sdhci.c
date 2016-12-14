@@ -2,6 +2,7 @@
  *  linux/drivers/mmc/host/sdhci.c - Secure Digital Host Controller Interface driver
  *
  *  Copyright (C) 2005-2008 Pierre Ossman, All Rights Reserved.
+ *  Copyright (C) 2016 XiaoMi, Inc.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -2985,7 +2986,11 @@ static void sdhci_data_irq(struct sdhci_host *host, u32 intmask)
 	if (intmask & SDHCI_INT_DATA_AVAIL) {
 		if (!(host->quirks2 & SDHCI_QUIRK2_NON_STANDARD_TUNING) &&
 			(command == MMC_SEND_TUNING_BLOCK ||
+<<<<<<< HEAD
 			command == MMC_SEND_TUNING_BLOCK_HS200)) {
+=======
+			 command == MMC_SEND_TUNING_BLOCK_HS200)) {
+>>>>>>> ee3f64a... Kernel: Xiaomi kernel changes for Redme 3S
 			host->tuning_done = 1;
 			wake_up(&host->buf_ready_int);
 			return;
@@ -3600,6 +3605,10 @@ static int sdhci_is_adma2_64bit(struct sdhci_host *host)
 #endif
 
 #ifdef CONFIG_MMC_CQ_HCI
+<<<<<<< HEAD
+=======
+
+>>>>>>> ee3f64a... Kernel: Xiaomi kernel changes for Redme 3S
 static void sdhci_cmdq_set_transfer_params(struct mmc_host *mmc)
 {
 	struct sdhci_host *host = mmc_priv(mmc);
@@ -3718,6 +3727,10 @@ static void sdhci_cmdq_set_transfer_params(struct mmc_host *mmc)
 {
 
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> ee3f64a... Kernel: Xiaomi kernel changes for Redme 3S
 static void sdhci_cmdq_clear_set_irqs(struct mmc_host *mmc, bool clear)
 {
 

@@ -1410,7 +1410,11 @@ static long gser_ioctl(struct file *fp, unsigned cmd, unsigned long arg)
 
 		if (smd_write_arg.size > GSERIAL_BUF_LEN) {
 			pr_err("%s: Invalid size:%u, max: %u", __func__,
+<<<<<<< HEAD
 				smd_write_arg.size, GSERIAL_BUF_LEN);
+=======
+						smd_write_arg.size, GSERIAL_BUF_LEN);
+>>>>>>> ee3f64a... Kernel: Xiaomi kernel changes for Redme 3S
 			ret = -EINVAL;
 			break;
 		}

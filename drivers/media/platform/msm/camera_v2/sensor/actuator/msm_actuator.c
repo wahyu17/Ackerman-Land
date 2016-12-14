@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 /* Copyright (c) 2011-2017, The Linux Foundation. All rights reserved.
+=======
+/* Copyright (c) 2011-2016, The Linux Foundation. All rights reserved.
+ * Copyright (C) 2016 XiaoMi, Inc.
+>>>>>>> ee3f64a... Kernel: Xiaomi kernel changes for Redme 3S
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -902,6 +907,7 @@ static int32_t msm_actuator_bivcm_init_step_table(
 		code_per_step =
 			a_ctrl->region_params[region_index].code_per_step;
 		step_boundary =
+<<<<<<< HEAD
 			a_ctrl->region_params[region_index].
 			step_bound[MOVE_NEAR];
 		if (step_boundary >
@@ -909,6 +915,13 @@ static int32_t msm_actuator_bivcm_init_step_table(
 			pr_err("invalid step_boundary = %d, max_val = %d",
 				step_boundary,
 				set_info->af_tuning_params.total_steps);
+=======
+		    a_ctrl->region_params[region_index].step_bound[MOVE_NEAR];
+		if (step_boundary > set_info->af_tuning_params.total_steps) {
+			pr_err("invalid step_boundary = %d, max_val = %d",
+			       step_boundary,
+			       set_info->af_tuning_params.total_steps);
+>>>>>>> ee3f64a... Kernel: Xiaomi kernel changes for Redme 3S
 			kfree(a_ctrl->step_position_table);
 			a_ctrl->step_position_table = NULL;
 			return -EINVAL;
@@ -956,10 +969,18 @@ static int32_t msm_actuator_init_step_table(struct msm_actuator_ctrl_t *a_ctrl,
 
 	/* validate the actuator state */
 	if (a_ctrl->actuator_state != ACT_OPS_ACTIVE) {
+<<<<<<< HEAD
 		pr_err("%s:%d invalid actuator_state %d\n"
 			, __func__, __LINE__, a_ctrl->actuator_state);
 		return -EINVAL;
 	}
+=======
+		pr_err("%s:%d invalid actuator_state %d\n", __func__, __LINE__,
+		       a_ctrl->actuator_state);
+		return -EINVAL;
+	}
+
+>>>>>>> ee3f64a... Kernel: Xiaomi kernel changes for Redme 3S
 	for (; data_size > 0; data_size--)
 		max_code_size *= 2;
 
@@ -993,6 +1014,7 @@ static int32_t msm_actuator_init_step_table(struct msm_actuator_ctrl_t *a_ctrl,
 		qvalue =
 			a_ctrl->region_params[region_index].qvalue;
 		step_boundary =
+<<<<<<< HEAD
 			a_ctrl->region_params[region_index].
 			step_bound[MOVE_NEAR];
 		if (step_boundary >
@@ -1000,12 +1022,23 @@ static int32_t msm_actuator_init_step_table(struct msm_actuator_ctrl_t *a_ctrl,
 			pr_err("invalid step_boundary = %d, max_val = %d",
 				step_boundary,
 				set_info->af_tuning_params.total_steps);
+=======
+			a_ctrl->region_params[region_index].step_bound[MOVE_NEAR];
+		if (step_boundary > set_info->af_tuning_params.total_steps) {
+			pr_err("invalid step_boundary = %d, max_val = %d",
+			       step_boundary,
+			       set_info->af_tuning_params.total_steps);
+>>>>>>> ee3f64a... Kernel: Xiaomi kernel changes for Redme 3S
 			kfree(a_ctrl->step_position_table);
 			a_ctrl->step_position_table = NULL;
 			return -EINVAL;
 		}
+<<<<<<< HEAD
 		for (; step_index <= step_boundary;
 			step_index++) {
+=======
+		for (; step_index <= step_boundary; step_index++) {
+>>>>>>> ee3f64a... Kernel: Xiaomi kernel changes for Redme 3S
 			if (qvalue > 1 && qvalue <= MAX_QVALUE)
 				cur_code = step_index * code_per_step / qvalue;
 			else

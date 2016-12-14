@@ -11,9 +11,14 @@
  * GNU General Public License for more details.
  */
 
+<<<<<<< HEAD:arch/arm/boot/dts/qcom/msm8953-cdp.dtsi
 #include "msm8953-pinctrl.dtsi"
 #include "msm8953-audio-cdp.dtsi"
 #include "msm8953-camera-sensor-cdp.dtsi"
+=======
+#include "msmtitanium-pinctrl.dtsi"
+#include "msmtitanium-camera-sensor-cdp.dtsi"
+>>>>>>> ee3f64a... Kernel: Xiaomi kernel changes for Redme 3S:arch/arm/boot/dts/qcom/msmtitanium-cdp.dtsi
 
 &spi_3 { /* BLSP1 QUP3 */
 	spi-max-frequency = <8000000>;
@@ -202,8 +207,6 @@
 
 &dsi_truly_1080_vid {
 	qcom,panel-supply-entries = <&dsi_panel_pwr_supply>;
-	qcom,mdss-dsi-pan-enable-dynamic-fps;
-	qcom,mdss-dsi-pan-fps-update = "dfps_immediate_clk_mode";
 };
 
 &dsi_truly_1080_cmd {
@@ -213,6 +216,7 @@
 	qcom,panel-roi-alignment = <2 2 4 2 1080 2>;
 };
 
+<<<<<<< HEAD:arch/arm/boot/dts/qcom/msm8953-cdp.dtsi
 &dsi_truly_wuxga_vid {
 	qcom,mdss-dsi-bl-pmic-control-type = "bl_ctrl_pwm";
 	qcom,mdss-dsi-bl-pmic-pwm-frequency = <100>;
@@ -222,6 +226,8 @@
 	qcom,mdss-dsi-pan-fps-update = "dfps_immediate_clk_mode";
 };
 
+=======
+>>>>>>> ee3f64a... Kernel: Xiaomi kernel changes for Redme 3S:arch/arm/boot/dts/qcom/msmtitanium-cdp.dtsi
 &blsp1_uart0 {
 	status = "ok";
 	pinctrl-names = "default";

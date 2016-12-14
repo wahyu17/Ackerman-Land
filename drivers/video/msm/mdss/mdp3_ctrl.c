@@ -2122,6 +2122,7 @@ static int mdp3_ctrl_lut_update(struct msm_fb_data_type *mfd,
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
 	lut_config.lut_enable = 7;
 	lut_config.lut_sel = mdp3_session->lut_sel;
 	lut_config.lut_position = 1;
@@ -2157,6 +2158,11 @@ static int mdp3_ctrl_lut_config(struct msm_fb_data_type *mfd,
 		(cfg->cmap.len > MDP_LUT_SIZE) ||
 		(cfg->cmap.start + cfg->cmap.len > MDP_LUT_SIZE)) {
 		pr_err("Invalid arguments.\n");
+=======
+	if (cmap->start > MDP_LUT_SIZE || cmap->len > MDP_LUT_SIZE ||
+				(cmap->start + cmap->len > MDP_LUT_SIZE)) {
+		pr_err("Invalid arguments\n");
+>>>>>>> ee3f64a... Kernel: Xiaomi kernel changes for Redme 3S
 		return  -EINVAL;
 	}
 
