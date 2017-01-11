@@ -29,7 +29,14 @@ aes-ce-blk-y := aes-glue-ce.o aes-ce.o
 obj-$(CONFIG_CRYPTO_AES_ARM64_NEON_BLK) += aes-neon-blk.o
 aes-neon-blk-y := aes-glue-neon.o aes-neon.o
 
+<<<<<<< HEAD
 AFLAGS_aes-ce.o		:= -DINTERLEAVE=2 -DINTERLEAVE_INLINE
+=======
+obj-$(CONFIG_CRYPTO_AES_ARM64) += aes-arm64.o
+aes-arm64-y := aes-cipher-core.o aes-cipher-glue.o
+
+AFLAGS_aes-ce.o		:= -DINTERLEAVE=4
+>>>>>>> 863fa4db9a42... BACKPORT: crypto: arm64/aes - add scalar implementation
 AFLAGS_aes-neon.o	:= -DINTERLEAVE=4
 
 CFLAGS_aes-glue-ce.o	:= -DUSE_V8_CRYPTO_EXTENSIONS
