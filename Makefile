@@ -614,7 +614,11 @@ KBUILD_CFLAGS	+= $(call cc-option,-fno-PIE)
 KBUILD_AFLAGS	+= $(call cc-option,-fno-PIE)
 
 ifdef CONFIG_CC_OPTIMIZE_FOR_SIZE
+<<<<<<< HEAD
 KBUILD_CFLAGS	+= -Os $(call cc-disable-warning,maybe-uninitialized,)
+=======
+KBUILD_CFLAGS	+= $(call cc-option,-Oz,-Os) $(call cc-disable-warning,maybe-uninitialized,)
+>>>>>>> 24cc7830d923... BACKPORT: kbuild: use -Oz instead of -Os when using clang
 else
 KBUILD_CFLAGS	+= -O2
 endif
