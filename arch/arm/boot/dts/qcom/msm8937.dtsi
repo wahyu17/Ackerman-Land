@@ -394,15 +394,15 @@
 		compatible = "qcom,msm-thermal";
 		qcom,sensor-id = <5>;
 		qcom,poll-ms = <250>;
-		qcom,limit-temp = <60>;
+		qcom,limit-temp = <85>;
 		qcom,temp-hysteresis = <10>;
 		qcom,freq-step = <2>;
-		qcom,core-limit-temp = <80>;
+		qcom,core-limit-temp = <95>;
 		qcom,core-temp-hysteresis = <10>;
-		qcom,hotplug-temp = <105>;
-		qcom,hotplug-temp-hysteresis = <15>;
-		qcom,freq-mitigation-temp = <105>;
-		qcom,freq-mitigation-temp-hysteresis = <15>;
+		qcom,hotplug-temp = <110>;
+		qcom,hotplug-temp-hysteresis = <8>;
+		qcom,freq-mitigation-temp = <110>;
+		qcom,freq-mitigation-temp-hysteresis = <8>;
 		qcom,freq-mitigation-value = <400000>;
 		qcom,therm-reset-temp = <115>;
 		qcom,online-hotplug-core;
@@ -740,13 +740,15 @@
 			 < 1209600 >,
 			 < 1248000 >,
 			 < 1344000 >,
-			 < 1401000 >;
+			 < 1401000 >,
+			 < 1497600 >;
 
 		qcom,cpufreq-table-4 =
 			 <  768000 >,
 			 <  902400 >,
 			 <  998400 >,
-			 < 1094400 >;
+			 < 1094400 >,
+			 < 1209600 >;
 	};
 
 	cci_cache: qcom,cci {
@@ -812,12 +814,12 @@
 			< 1094400  5053 >,	/* NOM   */
 			< 1248000  5712 >,	/* NOM+  */
 			< 1344000  7031 >,
-			< 1401000  7031 >;	/* TURBO */
+			< 1497600  7031 >;	/* TURBO */
 		cpu-to-dev-map-4 =
 			<  806400  2929 >,	/* SVS  */
 			<  902400  5053 >,	/* NOM   */
 			<  998400  6152 >,	/* NOM+  */
-			< 1094400  7031 >;	/* TURBO */
+			< 1209600  7031 >;	/* TURBO */
 		};
 
 		cci-cpufreq {
@@ -827,22 +829,22 @@
 			< 1094400  400000 >,	/* NOM   */
 			< 1248000  533333 >,	/* NOM+  */
 			< 1344000  533333 >,
-			< 1401000  533333 >;	/* TURBO */
+			< 1497600  533333 >;	/* TURBO */
 		cpu-to-dev-map-4 =
 			<  806400  400000 >,	/* SVS  */
 			<  902400  400000 >,	/* NOM   */
 			<  998400  533333 >,	/* NOM+  */
-			< 1094400  533333 >;	/* TURBO */
+			< 1209600  533333 >;	/* TURBO */
 		};
 
 		mincpubw-cpufreq {
 			target-dev = <&mincpubw>;
 			cpu-to-dev-map-0 =
 				< 1094400 2929 >,
-				< 1401000 4248 >;
+				< 1497600 4248 >;
 			cpu-to-dev-map-4 =
 				<  998400 2929 >,
-				< 1094400 4248 >;
+				< 1209600 4248 >;
 		};
 	};
 
@@ -1215,18 +1217,6 @@
 		compatible = "qcom,jtag-fuse-v2";
 		reg = <0xa601c 0x8>;
 		reg-names = "fuse-base";
-	};
-
-	sn_fuse: snfuse@0xa0128 {
-		compatible = "qcom,sn-fuse";
-		reg = <0xa0128 0x4>;
-		reg-names = "sn-base";
-	};
-
-	sec_boot_fuse: secbootfuse@0xa41d0 {
-		compatible = "qcom,sec-boot-fuse";
-		reg = <0xa41d0 0x4>;
-		reg-names = "sec-boot-base";
 	};
 
 	jtag_mm0: jtagmm@61bc000 {
