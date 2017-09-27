@@ -34,6 +34,8 @@ static int sdcardfs_d_revalidate(struct dentry *dentry, unsigned int flags)
 	struct dentry *parent_lower_dentry = NULL;
 	struct dentry *lower_cur_parent_dentry = NULL;
 	struct dentry *lower_dentry = NULL;
+	struct inode *inode;
+	struct sdcardfs_inode_data *data;
 
 	if (flags & LOOKUP_RCU)
 		return -ECHILD;
@@ -59,6 +61,14 @@ static int sdcardfs_d_revalidate(struct dentry *dentry, unsigned int flags)
 	parent_lower_dentry = parent_lower_path.dentry;
 	lower_dentry = lower_path.dentry;
 	lower_cur_parent_dentry = dget_parent(lower_dentry);
+
+	if ((lower_dentry->d_flags & DCACHE_OP_REVALIDATE)) {
+		err = lower_dentry->d_op->d_revalidate(lower_dentry, flags);
+		if (err == 0) {
+			d_drop(dentry);
+			goto out;
+		}
+	}
 
 	spin_lock(&lower_dentry->d_lock);
 	if (d_unhashed(lower_dentry)) {
@@ -94,6 +104,21 @@ static int sdcardfs_d_revalidate(struct dentry *dentry, unsigned int flags)
 	} else {
 		spin_unlock(&dentry->d_lock);
 		spin_unlock(&lower_dentry->d_lock);
+	}
+	if (!err)
+		goto out;
+
+	/* If our top's inode is gone, we may be out of date */
+	inode = igrab(dentry->d_inode);
+	if (inode) {
+		data = top_data_get(SDCARDFS_I(inode));
+		if (!data || data->abandoned) {
+			d_drop(dentry);
+			err = 0;
+		}
+		if (data)
+			data_put(data);
+		iput(inode);
 	}
 
 out:
@@ -153,9 +178,7 @@ static int sdcardfs_cmp_ci(const struct dentry *parent,
 	return 1;
 }
 
-static void sdcardfs_canonical_path(const struct path *path,
-				struct path *actual_path)
-{
+static void sdcardfs_canonical_path(const struct path *path, struct path *actual_path) {
 	sdcardfs_get_real_lower(path->dentry, actual_path);
 }
 
@@ -166,4 +189,3 @@ const struct dentry_operations sdcardfs_ci_dops = {
 	.d_compare	= sdcardfs_cmp_ci,
 	.d_canonical_path = sdcardfs_canonical_path,
 };
-
