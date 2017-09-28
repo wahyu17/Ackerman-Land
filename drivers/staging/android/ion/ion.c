@@ -3,7 +3,7 @@
  * drivers/staging/android/ion/ion.c
  *
  * Copyright (C) 2011 Google, Inc.
- * Copyright (c) 2011-2016, The Linux Foundation. All rights reserved.
+ * Copyright (c) 2011-2017, The Linux Foundation. All rights reserved.
  *
  * This software is licensed under the terms of the GNU General Public
  * License version 2, as published by the Free Software Foundation, and
@@ -224,10 +224,10 @@ static struct ion_buffer *ion_buffer_create(struct ion_heap *heap,
 			"heap->ops->map_dma should return ERR_PTR on error"))
 		table = ERR_PTR(-EINVAL);
 	if (IS_ERR(table)) {
-		heap->ops->free(buffer);
-		kfree(buffer);
-		return ERR_CAST(table);
+		ret = -EINVAL;
+		goto err1;
 	}
+
 	buffer->sg_table = table;
 	if (ion_buffer_fault_user_mappings(buffer)) {
 		int num_pages = PAGE_ALIGN(buffer->size) / PAGE_SIZE;
@@ -237,7 +237,7 @@ static struct ion_buffer *ion_buffer_create(struct ion_heap *heap,
 		buffer->pages = vmalloc(sizeof(struct page *) * num_pages);
 		if (!buffer->pages) {
 			ret = -ENOMEM;
-			goto err1;
+			goto err;
 		}
 
 		for_each_sg(table->sgl, sg, table->nents, i) {
@@ -246,9 +246,6 @@ static struct ion_buffer *ion_buffer_create(struct ion_heap *heap,
 			for (j = 0; j < sg->length / PAGE_SIZE; j++)
 				buffer->pages[k++] = page++;
 		}
-
-		if (ret)
-			goto err;
 	}
 
 	mutex_init(&buffer->lock);
@@ -272,10 +269,8 @@ static struct ion_buffer *ion_buffer_create(struct ion_heap *heap,
 
 err:
 	heap->ops->unmap_dma(heap, buffer);
-	heap->ops->free(buffer);
 err1:
-	if (buffer->pages)
-		vfree(buffer->pages);
+	heap->ops->free(buffer);
 err2:
 	kfree(buffer);
 	return ERR_PTR(ret);
@@ -473,7 +468,7 @@ static struct ion_handle *pass_to_user(struct ion_handle *handle)
 /* Must hold the client lock */
 static int user_ion_handle_put_nolock(struct ion_handle *handle)
 {
-	int ret;
+	int ret = 0;
 
 	if (--handle->user_ref_count == 0)
 		ret = ion_handle_put_nolock(handle);
@@ -704,7 +699,7 @@ static void user_ion_free_nolock(struct ion_client *client,
 		WARN(1, "%s: invalid handle passed to free.\n", __func__);
 		return;
 	}
-	if (!handle->user_ref_count > 0) {
+	if (handle->user_ref_count == 0) {
 		WARN(1, "%s: User does not have access!\n", __func__);
 		return;
 	}
