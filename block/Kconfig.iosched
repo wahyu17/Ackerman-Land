@@ -34,7 +34,7 @@ config IOSCHED_DEADLINE
 
 config IOSCHED_MAPLE
 	tristate "Maple I/O scheduler"
-	default y
+	default n
 
 config IOSCHED_CFQ
 	tristate "CFQ I/O scheduler"
@@ -49,7 +49,7 @@ config IOSCHED_CFQ
 
 config IOSCHED_FIOPS
 	tristate "IOPS based I/O scheduler"
-	default y
+	default n
 	---help---
 	  This is an IOPS based I/O scheduler. It will try to distribute
           IOPS equally among all processes in the system. It's mainly for
@@ -57,7 +57,7 @@ config IOSCHED_FIOPS
 
 config IOSCHED_SIO
 	tristate "Simple I/O scheduler"
-	default y
+	default n
 	---help---
 	  The Simple I/O scheduler is an extremely simple scheduler,
 	  based on noop and deadline, that relies on deadlines to
@@ -74,14 +74,14 @@ config CFQ_GROUP_IOSCHED
 
 config IOSCHED_FIFO
 	tristate "FIFO I/O scheduler"
-	default y
+	default n
 	---help---
 	  Fifo is similar to no-op I/O scheduler and it's a minimal scheduler that does basic merging
 	  and sorting. Ported from: https://github.com/AndroidDeveloperAlliance/ZenKernel_TUNA/blob/master/block/fifo-iosched.c
   
 config IOSCHED_SIOPLUS
 	tristate "Simple I/O scheduler plus"
-	default y
+	default n
 	---help---
 	  The Simple I/O scheduler is an extremely simple scheduler,
 	  based on noop and deadline, that relies on deadlines to
@@ -91,20 +91,20 @@ config IOSCHED_SIOPLUS
 
 config IOSCHED_TRIPNDROID
 	tristate "Tripndroid"
-	default y
+	default n
 	---help---
 	  The Trip N Droid scheduler
 
 config IOSCHED_VR
 	tristate "V(R) I/O scheduler"
-	default y
+	default n
 	---help---
 	  Requests are chosen according to SSTF with a penalty of rev_penalty
 	  for switching head direction.
 
 config IOSCHED_ZEN
 	tristate "Zen I/O scheduler"
-	default y
+	default n
 	---help---
 	  FCFS, dispatches are back-inserted, deadlines ensure fairness.
 	  Should work best with devices where there is no travel delay.
