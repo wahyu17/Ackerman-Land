@@ -26,9 +26,9 @@
 };
 
 &wsa881x_i2c_f {
-	status = "disabled";
+	status = "okay";
 };
 
 &wsa881x_i2c_45 {
-	status = "disabled";
+	status = "okay";
 };
