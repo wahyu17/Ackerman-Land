@@ -884,7 +884,6 @@ config QCOM_SMCINVOKE
 	  Enable SMCInvoke driver which supports capability based secure
 	  communication between QSEE and HLOS.
 
-<<<<<<< HEAD
 config QCOM_EARLY_RANDOM
 	bool "Initialize random pool very early"
 	help
@@ -901,7 +900,7 @@ config WCD_DSP_GLINK
 	   This option enables driver which provides communication interface
 	   between MSM and WCD DSP over glink transport protocol. This driver
 	   provides read and write interface via char device.
-=======
+
 config CPUMAXFREQ
 	bool "Enable CPUMAXFREQ Proc Interface"
 	help
@@ -924,7 +923,6 @@ config MSM_SMART_SUPPORT
 	help
 	  Enable this to be able to choose the smart policy for controlling the
 	  performance and power on some msm platforms.
->>>>>>> c22f88d... Kernel: Xiaomi kernel changes for Redme 3S
 
 source "drivers/soc/qcom/memshare/Kconfig"
 

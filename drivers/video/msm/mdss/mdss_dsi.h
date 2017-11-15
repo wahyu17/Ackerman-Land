@@ -1,9 +1,5 @@
-<<<<<<< HEAD
 /* Copyright (c) 2012-2017, The Linux Foundation. All rights reserved.
-=======
-/* Copyright (c) 2012-2016, The Linux Foundation. All rights reserved.
  * Copyright (C) 2016 XiaoMi, Inc.
->>>>>>> c22f88d... Kernel: Xiaomi kernel changes for Redme 3S
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -488,10 +484,8 @@ struct mdss_dsi_ctrl_pdata {
 	struct dsi_panel_cmds lp_on_cmds;
 	struct dsi_panel_cmds lp_off_cmds;
 	struct dsi_panel_cmds status_cmds;
-<<<<<<< HEAD
 	struct dsi_panel_cmds idle_on_cmds; /* for lp mode */
 	struct dsi_panel_cmds idle_off_cmds;
-=======
 	struct dsi_panel_cmds warm_cmds;
 	struct dsi_panel_cmds cool_cmds;
 	struct dsi_panel_cmds nature_cmds;
@@ -504,7 +498,6 @@ struct mdss_dsi_ctrl_pdata {
 	struct dsi_panel_cmds ce_cmds;
 	bool init_last;
 
->>>>>>> c22f88d... Kernel: Xiaomi kernel changes for Redme 3S
 	u32 *status_valid_params;
 	u32 *status_cmds_rlen;
 	u32 *status_value;

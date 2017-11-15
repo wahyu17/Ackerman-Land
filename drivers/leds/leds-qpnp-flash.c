@@ -30,11 +30,8 @@
 #include <linux/leds-qpnp-flash.h>
 #include <linux/debugfs.h>
 #include <linux/uaccess.h>
-<<<<<<< HEAD
 #include "leds.h"
-=======
 #include <linux/wakelock.h>
->>>>>>> c22f88d... Kernel: Xiaomi kernel changes for Redme 3S
 
 #define FLASH_LED_PERIPHERAL_SUBTYPE(base)			(base + 0x05)
 #define FLASH_SAFETY_TIMER(base)				(base + 0x40)

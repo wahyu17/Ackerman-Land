@@ -1577,10 +1577,7 @@ static int msm_quat_mi2s_snd_startup(struct snd_pcm_substream *substream)
 
 	pr_debug("%s(): substream = %s  stream = %d\n", __func__,
 				substream->name, substream->stream);
-<<<<<<< HEAD
 
-=======
->>>>>>> c22f88d... Kernel: Xiaomi kernel changes for Redme 3S
 	if (!q6core_is_adsp_ready()) {
 		pr_err("%s(): adsp not ready\n", __func__);
 		return -EINVAL;
@@ -1644,10 +1641,7 @@ static int msm_quin_mi2s_snd_startup(struct snd_pcm_substream *substream)
 
 	pr_debug("%s(): substream = %s  stream = %d\n", __func__,
 				substream->name, substream->stream);
-<<<<<<< HEAD
 
-=======
->>>>>>> c22f88d... Kernel: Xiaomi kernel changes for Redme 3S
 	if (!q6core_is_adsp_ready()) {
 		pr_err("%s(): adsp not ready\n", __func__);
 		return -EINVAL;

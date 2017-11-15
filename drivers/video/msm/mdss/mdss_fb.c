@@ -55,12 +55,8 @@
 #include "mdss_debug.h"
 #include "mdss_smmu.h"
 #include "mdss_mdp.h"
-<<<<<<< HEAD
 #include "mdp3_ctrl.h"
-=======
 #include "mdss_dsi.h"
-
->>>>>>> c22f88d... Kernel: Xiaomi kernel changes for Redme 3S
 
 #ifdef CONFIG_FB_MSM_TRIPLE_BUFFER
 #define MDSS_FB_NUM 3
