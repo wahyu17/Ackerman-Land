@@ -61,7 +61,6 @@
 			reusable;
 			alignment = <0 0x400000>;
 			size = <0 0x7000000>;
-			status = "disabled";
 		};
 
 		qseecom_mem: qseecom_region@0 {
@@ -80,14 +79,6 @@
 
 		cont_splash_mem: splash_region@83000000 {
 			reg = <0x0 0x8dd00000 0x0 0x1400000>;
-		};
-
-		pstore_reserve_mem: pstore_reserve_mem_region@0 {
-			linux,reserve-contiguous-region;
-			linux,reserve-region;
-			linux,remove-completely;
-			reg = <0x0 0x9ff00000 0x0 0x00100000>;
-			label = "pstore_reserve_mem";
 		};
 
 	};
@@ -628,9 +619,9 @@
 		reg = <0x1800000 0x80000>,
 			<0xb016000 0x00040>,
 			<0xb116000 0x00040>,
-			<0xb1d0000 0x00040>;
+			<0x00a6018 0x00004>;
 		reg-names = "cc_base", "apcs_c1_base",
-			"apcs_c0_base", "apcs_cci_base";
+			"apcs_c0_base", "efuse";
 		vdd_dig-supply = <&pm8937_s2_level>;
 		vdd_sr2_dig-supply = <&pm8937_s2_level_ao>;
 		vdd_sr2_pll-supply = <&pm8937_l7_ao>;
