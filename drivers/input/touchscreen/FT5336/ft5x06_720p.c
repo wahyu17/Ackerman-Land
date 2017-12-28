@@ -589,6 +589,9 @@ static int ft5x06_ts_pinctrl_select(struct ft5x06_ts_data *ft5x06_data, bool on)
 	return 0;
 }
 
+#ifdef CONFIG_WAKE_GESTURES
+static bool ev_btn_status = false;
+#endif
 #ifdef CONFIG_PM
 static int ft5x06_ts_suspend(struct device *dev)
 {
@@ -608,11 +611,31 @@ static int ft5x06_ts_suspend(struct device *dev)
 
 #ifdef CONFIG_WAKE_GESTURES
 	if (device_may_wakeup(dev) && (s2w_switch || dt2w_switch)) {
+		if (!ev_btn_status) {
+			for (i = 0; i < data->pdata->num_max_touches; i++) {
+				input_mt_slot(data->input_dev, i);
+				input_mt_report_slot_state(data->input_dev, MT_TOOL_FINGER, 0);
+			}
+			input_mt_report_pointer_emulation(data->input_dev, false);
+			__clear_bit(BTN_TOUCH, data->input_dev->keybit);
+			input_sync(data->input_dev);
+			ev_btn_status = true;
+		}
+
 		err = enable_irq_wake(data->client->irq);
 		if (err)
 			dev_err(&data->client->dev,
 				"%s: set_irq_wake failed\n", __func__);
 		data->suspended = true;
+
+		if (dt2w_switch_changed) {
+			dt2w_switch = dt2w_switch_temp;
+			dt2w_switch_changed = false;
+		}
+		if (s2w_switch_changed) {
+			s2w_switch = s2w_switch_temp;
+			s2w_switch_changed = false;
+		}
 
 		return err;
 	}
@@ -668,7 +691,6 @@ static int ft5x06_ts_resume(struct device *dev)
 {
 	struct ft5x06_ts_data *data = dev_get_drvdata(dev);
 	int err;
-	int i;
 
 	if (!data->suspended) {
 		dev_dbg(dev, "Already in awake state\n");
@@ -677,28 +699,16 @@ static int ft5x06_ts_resume(struct device *dev)
 
 #ifdef CONFIG_WAKE_GESTURES
 	if (device_may_wakeup(dev) && (s2w_switch || dt2w_switch)) {
-
-		for (i = 0; i < data->pdata->num_max_touches; i++) {
-			input_mt_slot(data->input_dev, i);
-			input_mt_report_slot_state(data->input_dev, MT_TOOL_FINGER, 0);
+		if (ev_btn_status) {
+			__set_bit(BTN_TOUCH, data->input_dev->keybit);
+			input_sync(data->input_dev);
+			ev_btn_status = false;
 		}
-		input_mt_report_pointer_emulation(data->input_dev, false);
-		input_sync(data->input_dev);
-
 		err = disable_irq_wake(data->client->irq);
 		if (err)
 			dev_err(dev, "%s: disable_irq_wake failed\n",
 				__func__);
 		data->suspended = false;
-
-		if (dt2w_switch_changed) {
-			dt2w_switch = dt2w_switch_temp;
-			dt2w_switch_changed = false;
-		}
-		if (s2w_switch_changed) {
-			s2w_switch = s2w_switch_temp;
-			s2w_switch_changed = false;
-		}
 
 		return err;
 	}

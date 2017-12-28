@@ -1254,6 +1254,7 @@ irq_ic_err:
 }
 
 #ifdef CONFIG_WAKE_GESTURES
+static bool ev_btn_status = false;
 static bool ist30xx_irq_active = false;
 static void ist30xx_irq_handler(int irq, bool active)
 {
@@ -1275,14 +1276,39 @@ static void ist30xx_irq_handler(int irq, bool active)
 static int ist30xx_suspend(struct device *dev)
 {
 	struct ist30xx_data *data = dev_get_drvdata(dev);
+#ifdef CONFIG_WAKE_GESTURES
+	int i;
+#endif
 
 	if (data->debugging_mode)
 		return 0;
 
 #ifdef CONFIG_WAKE_GESTURES
 	if (device_may_wakeup(dev) && (s2w_switch || dt2w_switch)) {
+
+		if (!ev_btn_status) {
+			/* release all touches */
+			for (i = 0; i < IST30XX_MAX_MT_FINGERS; i++) {
+				input_mt_slot(data->input_dev, i);
+				input_mt_report_slot_state(data->input_dev, MT_TOOL_FINGER, 0);
+			}
+			input_mt_report_pointer_emulation(data->input_dev, false);
+			__clear_bit(BTN_TOUCH, data->input_dev->keybit);
+			input_sync(data->input_dev);
+			ev_btn_status = true;
+		}
 		ist30xx_irq_handler(data->client->irq, true);
 		data->suspended = true;
+
+		if (dt2w_switch_changed) {
+			dt2w_switch = dt2w_switch_temp;
+			dt2w_switch_changed = false;
+		}
+		if (s2w_switch_changed) {
+			s2w_switch = s2w_switch_temp;
+			s2w_switch_changed = false;
+		}
+
 		return 0;
 	}
 #endif
@@ -1316,9 +1342,6 @@ static int ist30xx_suspend(struct device *dev)
 static int ist30xx_resume(struct device *dev)
 {
 	struct ist30xx_data *data = dev_get_drvdata(dev);
-#ifdef CONFIG_WAKE_GESTURES
-	int i;
-#endif
 
 	data->noise_mode |= (1 << NOISE_MODE_POWER);
 
@@ -1328,24 +1351,14 @@ static int ist30xx_resume(struct device *dev)
 #ifdef CONFIG_WAKE_GESTURES
 	if (device_may_wakeup(dev) && (s2w_switch || dt2w_switch)) {
 
-		for (i = 0; i < IST30XX_MAX_MT_FINGERS; i++) {
-			input_mt_slot(data->input_dev, i);
-			input_mt_report_slot_state(data->input_dev, MT_TOOL_FINGER, 0);
+		if (ev_btn_status) {
+			__set_bit(BTN_TOUCH, data->input_dev->keybit);
+			input_sync(data->input_dev);
+			ev_btn_status = false;
 		}
-		input_mt_report_pointer_emulation(data->input_dev, false);
-		input_sync(data->input_dev);
 
 		ist30xx_irq_handler(data->client->irq, false);
 		data->suspended = false;
-
-		if (dt2w_switch_changed) {
-			dt2w_switch = dt2w_switch_temp;
-			dt2w_switch_changed = false;
-		}
-		if (s2w_switch_changed) {
-			s2w_switch = s2w_switch_temp;
-			s2w_switch_changed = false;
-		}
 
 		return 0;
 	}
