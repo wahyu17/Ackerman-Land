@@ -42,7 +42,7 @@
 #define DT2W_DEFAULT		0
 #define S2W_DEFAULT		0
 #define S2S_DEFAULT		0
-#define WG_PWRKEY_DUR           60
+#define WG_PWRKEY_DUR           30
 
 /* Redmi 3 series */
 #define SWEEP_Y_MAX             1280
