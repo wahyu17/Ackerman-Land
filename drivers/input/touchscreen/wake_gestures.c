@@ -615,6 +615,10 @@ static ssize_t doubletap2wake_dump(struct device *dev,
 		struct device_attribute *attr, const char *buf, size_t count)
 {
 	sscanf(buf, "%d ", &dt2w_switch_temp);
+	// KA sets switch to 2 under 'Full' setting, fallback to 1..
+	if (dt2w_switch_temp == 2)
+		dt2w_switch_temp = 1;
+
 	if (dt2w_switch_temp < 0 || dt2w_switch_temp > 1)
 		dt2w_switch_temp = 0;
 		
