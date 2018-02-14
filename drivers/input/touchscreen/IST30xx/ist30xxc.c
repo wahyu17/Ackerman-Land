@@ -201,9 +201,9 @@ void ist30xx_enable_irq(struct ist30xx_data *data)
 }
 
 #ifdef CONFIG_WAKE_GESTURES
-bool ist_scr_suspended = false;
+struct ist30xx_data *ist30xx_ts = NULL;
 bool scr_suspended_ist(void) {
-	return ist_scr_suspended;
+	return ist30xx_ts->suspend;
 }
 #endif
 
@@ -858,7 +858,7 @@ static void report_input_data(struct ist30xx_data *data, int finger_counts,
 						 IST30XX_MAX_W);
 			}
 #ifdef CONFIG_WAKE_GESTURES
-		if (ist_scr_suspended)
+		if (data->suspend)
 			fingers[idx].bit_field.x += 5000;
 #endif
 		}
@@ -1268,7 +1268,7 @@ static int ist30xx_suspend(struct device *dev)
 #ifdef CONFIG_WAKE_GESTURES
 	if (device_may_wakeup(dev) && (s2w_switch || dt2w_switch)) {
 		ist30xx_enable_irq(data);
-		ist_scr_suspended = true;
+		data->suspend = true;
 		return 0;
 	}
 #endif
@@ -1299,7 +1299,9 @@ static int ist30xx_suspend(struct device *dev)
 static int ist30xx_resume(struct device *dev)
 {
 	struct ist30xx_data *data = dev_get_drvdata(dev);
+#ifdef CONFIG_WAKE_GESTURES
 	int i;
+#endif
 
 	data->noise_mode |= (1 << NOISE_MODE_POWER);
 
@@ -1317,7 +1319,7 @@ static int ist30xx_resume(struct device *dev)
 		input_sync(data->input_dev);
 
 		ist30xx_disable_irq(data);
-		ist_scr_suspended = false;
+		data->suspend = false;
 
 		if (dt2w_switch_changed) {
 			dt2w_switch = dt2w_switch_temp;
@@ -1359,7 +1361,7 @@ static int ist30xx_resume(struct device *dev)
 			      CHECK_CHARGER_INTERVAL);
 #endif
 
-	ist_scr_suspended = false;
+	data->suspend = false;
 	return 0;
 }
 
@@ -2107,6 +2109,7 @@ static int ist30xx_probe(struct i2c_client *client,
 		goto err_init_drv;
 
 #ifdef CONFIG_WAKE_GESTURES
+	ist30xx_ts = data;
 	device_init_wakeup(&client->dev, 1);
 #endif
 
