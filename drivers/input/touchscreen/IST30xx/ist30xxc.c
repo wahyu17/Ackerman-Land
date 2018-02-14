@@ -1257,6 +1257,24 @@ irq_ic_err:
 	return IRQ_HANDLED;
 }
 
+#ifdef CONFIG_WAKE_GESTURES
+static bool ist30xx_irq_active = false;
+static void ist30xx_irq_handler(int irq, bool active)
+{
+	if (active) {
+		if (!ist30xx_irq_active) {
+			enable_irq_wake(irq);
+			ist30xx_irq_active = true;
+		}
+	} else {
+		if (ist30xx_irq_active) {
+			disable_irq_wake(irq);
+			ist30xx_irq_active = false;
+		}
+	}
+}
+#endif
+
 #ifdef CONFIG_PM
 static int ist30xx_suspend(struct device *dev)
 {
@@ -1267,7 +1285,7 @@ static int ist30xx_suspend(struct device *dev)
 
 #ifdef CONFIG_WAKE_GESTURES
 	if (device_may_wakeup(dev) && (s2w_switch || dt2w_switch)) {
-		ist30xx_enable_irq(data);
+		ist30xx_irq_handler(data->client->irq, true);
 		data->suspend = true;
 		return 0;
 	}
@@ -1318,7 +1336,7 @@ static int ist30xx_resume(struct device *dev)
 		input_mt_report_pointer_emulation(data->input_dev, false);
 		input_sync(data->input_dev);
 
-		ist30xx_disable_irq(data);
+		ist30xx_irq_handler(data->client->irq, false);
 		data->suspend = false;
 
 		if (dt2w_switch_changed) {
