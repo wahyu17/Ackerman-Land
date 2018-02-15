@@ -106,11 +106,7 @@
 #define IST30XX_DEBUG				(1)
 #define IST30XX_CMCS_TEST			(1)
 #define IST30XX_STATUS_DEBUG		(0)
-#ifndef CONFIG_WAKE_GESTURES
 #define IST30XX_GESTURE				(0)
-#else
-#define IST30XX_GESTURE				(1)
-#endif
 #define IST30XX_SURFACE_TOUCH		(0)
 #define IST30XX_BLADE_TOUCH			(0)
 #define IST30XX_SDC_SLOPE           (0)
@@ -500,6 +496,9 @@ struct ist30xx_data {
 #if IST30XX_GESTURE
 	bool suspend;
 	bool gesture;
+#endif
+#ifdef CONFIG_WAKE_GESTURES
+	bool suspended;
 #endif
 	int scan_count;
 	int scan_retry;
