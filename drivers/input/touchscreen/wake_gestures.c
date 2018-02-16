@@ -440,10 +440,6 @@ static void dt2w_input_callback(struct work_struct *unused)
 static void wg_input_event(struct input_handle *handle, unsigned int type,
 				unsigned int code, int value)
 {
-	if (is_suspended() && code == ABS_MT_POSITION_X) {
-		value -= 5000;
-	}
-	
 #if WG_DEBUG
 	pr_info("wg: code: %s|%u, val: %i\n",
 		((code==ABS_MT_POSITION_X) ? "X" :

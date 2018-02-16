@@ -857,10 +857,6 @@ static void report_input_data(struct ist30xx_data *data, int finger_counts,
 						 ABS_MT_TOUCH_MAJOR,
 						 IST30XX_MAX_W);
 			}
-#ifdef CONFIG_WAKE_GESTURES
-		if (data->suspended)
-			fingers[idx].bit_field.x += 5000;
-#endif
 		}
 	}
 
