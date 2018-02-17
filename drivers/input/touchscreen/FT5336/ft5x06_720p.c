@@ -608,7 +608,6 @@ static int ft5x06_ts_suspend(struct device *dev)
 
 #ifdef CONFIG_WAKE_GESTURES
 	if (device_may_wakeup(dev) && (s2w_switch || dt2w_switch)) {
-		ft5x0x_write_reg(data->client, 0xD0, 1);
 		err = enable_irq_wake(data->client->irq);
 		if (err)
 			dev_err(&data->client->dev,
@@ -678,7 +677,6 @@ static int ft5x06_ts_resume(struct device *dev)
 
 #ifdef CONFIG_WAKE_GESTURES
 	if (device_may_wakeup(dev) && (s2w_switch || dt2w_switch)) {
-		ft5x0x_write_reg(data->client, 0xD0, 0);
 
 		for (i = 0; i < data->pdata->num_max_touches; i++) {
 			input_mt_slot(data->input_dev, i);
