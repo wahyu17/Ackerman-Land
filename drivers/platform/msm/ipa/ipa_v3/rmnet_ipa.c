@@ -1443,7 +1443,7 @@ static int ipa3_wwan_ioctl(struct net_device *dev, struct ifreq *ifr, int cmd)
 				sizeof(mux_channel[rmnet_index]
 					.vchannel_name));
 			mux_channel[rmnet_index].vchannel_name[
-				IFNAMSIZ - 1] = '\0';
+					IFNAMSIZ - 1] = '\0';
 
 			IPAWANDBG("cashe device[%s:%d] in IPA_wan[%d]\n",
 				mux_channel[rmnet_index].vchannel_name,
@@ -2893,9 +2893,7 @@ static int __init ipa3_wwan_init(void)
 
 	mutex_init(&rmnet_ipa3_ctx->ipa_to_apps_pipe_handle_guard);
 	rmnet_ipa3_ctx->ipa3_to_apps_hdl = -1;
-
 	ipa3_qmi_init();
-
 	/* Register for Modem SSR */
 	rmnet_ipa3_ctx->subsys_notify_handle = subsys_notif_register_notifier(
 			SUBSYS_MODEM,

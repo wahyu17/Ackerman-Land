@@ -599,7 +599,6 @@ static void sps_debugfs_init(void)
 	}
 
 	mutex_init(&sps_debugfs_lock);
-
 	return;
 
 bam_log_level_err:

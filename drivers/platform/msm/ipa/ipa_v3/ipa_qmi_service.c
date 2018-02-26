@@ -601,11 +601,10 @@ int ipa3_qmi_filter_request_send(struct ipa_install_fltr_rule_req_msg_v01 *req)
 
 	mutex_lock(&ipa3_qmi_lock);
 	if (ipa3_qmi_ctx != NULL) {
-		/* cache the qmi_filter_request */
 		memcpy(&(ipa3_qmi_ctx->ipa_install_fltr_rule_req_msg_cache[
-			ipa3_qmi_ctx->num_ipa_install_fltr_rule_req_msg]),
-			req,
-			sizeof(struct ipa_install_fltr_rule_req_msg_v01));
+				ipa3_qmi_ctx->num_ipa_install_fltr_rule_req_msg]),
+				req,
+				sizeof(struct ipa_install_fltr_rule_req_msg_v01));
 		ipa3_qmi_ctx->num_ipa_install_fltr_rule_req_msg++;
 		ipa3_qmi_ctx->num_ipa_install_fltr_rule_req_msg %= 10;
 	}
@@ -741,11 +740,10 @@ int ipa3_qmi_filter_notify_send(
 
 	mutex_lock(&ipa3_qmi_lock);
 	if (ipa3_qmi_ctx != NULL) {
-		/* cache the qmi_filter_request */
 		memcpy(&(ipa3_qmi_ctx->ipa_fltr_installed_notif_req_msg_cache[
-			ipa3_qmi_ctx->num_ipa_fltr_installed_notif_req_msg]),
-			req,
-			sizeof(struct ipa_fltr_installed_notif_req_msg_v01));
+				ipa3_qmi_ctx->num_ipa_fltr_installed_notif_req_msg]),
+				req,
+				sizeof(struct ipa_fltr_installed_notif_req_msg_v01));
 		ipa3_qmi_ctx->num_ipa_fltr_installed_notif_req_msg++;
 		ipa3_qmi_ctx->num_ipa_fltr_installed_notif_req_msg %= 10;
 	}
