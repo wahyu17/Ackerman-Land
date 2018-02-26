@@ -12,11 +12,11 @@
 
 #define SECBOOT_FUSE		(0x000)
 
-static uint32_t secboot_fuse;
+static uint32_t secboot_fuse = 0;
 
 struct secboot_fuse_drvdata {
-	void __iomem *base;
-	struct device *dev;
+	void __iomem		*base;
+	struct device		*dev;
 };
 
 static struct secboot_fuse_drvdata *secdrvdata;
@@ -45,17 +45,17 @@ static int secboot_proc_open(struct inode *inode, struct file *file)
 }
 
 static const struct file_operations secboot_fops = {
-	.open = secboot_proc_open,
-	.read = seq_read,
-	.llseek = seq_lseek,
-	.release = single_release,
+	.open		= secboot_proc_open,
+	.read		= seq_read,
+	.llseek		= seq_lseek,
+	.release	= single_release,
 };
 
 static void secboot_fuse_create_proc(void)
 {
 	struct proc_dir_entry *entry;
-	entry = proc_create("secboot_fuse_reg", 0 /* default mode */ ,
-			    NULL /* parent dir */ , &secboot_fops);
+	entry = proc_create("secboot_fuse_reg", 0 /* default mode */,
+			NULL /* parent dir */, &secboot_fops);
 }
 
 static int secboot_fuse_probe(struct platform_device *pdev)
@@ -72,8 +72,7 @@ static int secboot_fuse_probe(struct platform_device *pdev)
 	drvdata->dev = &pdev->dev;
 	platform_set_drvdata(pdev, drvdata);
 
-	res =
-	    platform_get_resource_byname(pdev, IORESOURCE_MEM, "sec-boot-base");
+	res = platform_get_resource_byname(pdev, IORESOURCE_MEM, "sec-boot-base");
 	if (!res)
 		return -ENODEV;
 
@@ -97,27 +96,25 @@ static struct of_device_id secboot_fuse_match[] = {
 };
 
 static struct platform_driver secboot_fuse_driver = {
-	.probe = secboot_fuse_probe,
-	.remove = secboot_fuse_remove,
-	.driver = {
-		   .name = "msm-secboot-fuse",
-		   .owner = THIS_MODULE,
-		   .of_match_table = secboot_fuse_match,
-		   },
+	.probe          = secboot_fuse_probe,
+	.remove         = secboot_fuse_remove,
+	.driver         = {
+		.name   = "msm-secboot-fuse",
+		.owner	= THIS_MODULE,
+		.of_match_table = secboot_fuse_match,
+	},
 };
 
 static int __init secboot_fuse_init(void)
 {
 	return platform_driver_register(&secboot_fuse_driver);
 }
-
 arch_initcall(secboot_fuse_init);
 
 static void __exit secboot_fuse_exit(void)
 {
 	platform_driver_unregister(&secboot_fuse_driver);
 }
-
 module_exit(secboot_fuse_exit);
 
 MODULE_LICENSE("GPL v2");
