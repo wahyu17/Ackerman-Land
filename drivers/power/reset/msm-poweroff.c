@@ -153,6 +153,7 @@ static bool get_dload_mode(void)
 	return dload_mode_enabled;
 }
 
+#if 0
 static void enable_emergency_dload_mode(void)
 {
 	int ret;
@@ -177,6 +178,7 @@ static void enable_emergency_dload_mode(void)
 	if (ret)
 		pr_err("Failed to set secure EDLOAD mode: %d\n", ret);
 }
+#endif
 
 static int dload_set(const char *val, struct kernel_param *kp)
 {
@@ -331,11 +333,12 @@ static void msm_restart_prepare(const char *cmd)
 			if (!ret)
 				__raw_writel(0x6f656d00 | (code & 0xff),
 					     restart_reason);
+#if 0
 		} else if (!strncmp(cmd, "edl", 3)) {
 			enable_emergency_dload_mode();
-		} 
+#endif
 #ifdef USER_TEST_MODE_SWITCH  //TQY
-		else if (!strncmp(cmd, "userswitch", 10)) {
+		} else if (!strncmp(cmd, "userswitch", 10)) {
 			//printk("userswitch ynn!!!!\n");
 			__raw_writel(0x77665506, restart_reason);
 		}else if (!strncmp(cmd, "testswitch", 10)) {
@@ -344,9 +347,8 @@ static void msm_restart_prepare(const char *cmd)
 		}else if (!strncmp(cmd, "debugswitch", 11)) {
 			//printk("debugswitch!!!!!\n");
 			__raw_writel(0x88776606, restart_reason);
-		}
 #endif		 
-		else {
+		} else {
 			__raw_writel(0x77665501, restart_reason);
 		}
 	}
