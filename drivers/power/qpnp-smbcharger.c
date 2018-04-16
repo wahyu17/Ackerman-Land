@@ -643,6 +643,7 @@ out:
 	return rc;
 }
 
+static int qpnp_is_awake = 1;
 static void smbchg_stay_awake(struct smbchg_chip *chip, int reason)
 {
 	int reasons;
@@ -653,6 +654,7 @@ static void smbchg_stay_awake(struct smbchg_chip *chip, int reason)
 		pr_smb(PR_PM, "staying awake: 0x%02x (bit %d)\n",
 				reasons, reason);
 		pm_stay_awake(chip->dev);
+		qpnp_is_awake = 1;
 	}
 	chip->wake_reasons = reasons;
 	mutex_unlock(&chip->pm_lock);
@@ -668,10 +670,17 @@ static void smbchg_relax(struct smbchg_chip *chip, int reason)
 		pr_smb(PR_PM, "relaxing: 0x%02x (bit %d)\n",
 				reasons, reason);
 		pm_relax(chip->dev);
+		qpnp_is_awake = 0;
 	}
 	chip->wake_reasons = reasons;
 	mutex_unlock(&chip->pm_lock);
 };
+
+int get_qpnpsmb_awake(void)
+{
+	return qpnp_is_awake;
+}
+EXPORT_SYMBOL(get_qpnpsmb_awake);
 
 enum pwr_path_type {
 	UNKNOWN = 0,
