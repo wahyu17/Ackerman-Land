@@ -1310,7 +1310,9 @@ static void amp_init(struct hci_request *req)
 
 	/* Read Local Supported Features */
 	hci_req_add(req, HCI_OP_READ_LOCAL_FEATURES, 0, NULL);
-
+#if 1
+	req->hdev->commands[29] &= ~(0x08|0x10);
+#endif
 	/* Read Local AMP Info */
 	hci_req_add(req, HCI_OP_READ_LOCAL_AMP_INFO, 0, NULL);
 
@@ -1544,8 +1546,12 @@ static void hci_init2_req(struct hci_request *req, unsigned long opt)
 	/* AVM Berlin (31), aka "BlueFRITZ!", doesn't support the read
 	 * local supported commands HCI command.
 	 */
-	if (hdev->manufacturer != 31 && hdev->hci_ver > BLUETOOTH_VER_1_1)
+	if (hdev->manufacturer != 31 && hdev->hci_ver > BLUETOOTH_VER_1_1) {
 		hci_req_add(req, HCI_OP_READ_LOCAL_COMMANDS, 0, NULL);
+#if 1
+		req->hdev->commands[29] &= ~(0x08|0x10);
+#endif
+	}
 
 	if (lmp_ssp_capable(hdev)) {
 		/* When SSP is available, then the host features page
