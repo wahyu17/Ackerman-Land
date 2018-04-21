@@ -516,8 +516,12 @@ static void hci_cc_read_local_commands(struct hci_dev *hdev,
 		return;
 
 	if (test_bit(HCI_SETUP, &hdev->dev_flags) ||
-	    test_bit(HCI_CONFIG, &hdev->dev_flags))
+	    test_bit(HCI_CONFIG, &hdev->dev_flags)) {
+#if 1
+		rp->commands[29] &= ~(0x08|0x10);
+#endif
 		memcpy(hdev->commands, rp->commands, sizeof(hdev->commands));
+	}
 }
 
 static void hci_cc_read_local_features(struct hci_dev *hdev,
