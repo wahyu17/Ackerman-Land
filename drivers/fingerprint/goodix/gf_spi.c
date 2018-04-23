@@ -880,7 +880,7 @@ static int __init gf_init(void)
 	}
 
 #ifdef GF_NETLINK_ENABLE
-		 netlink_init();
+	netlink_init();
 #endif
 	pr_info(" status = 0x%x\n", status);
 	FUNC_EXIT();

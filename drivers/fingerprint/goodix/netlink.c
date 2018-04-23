@@ -17,10 +17,10 @@ int flag = 0;
 
 
 struct gf_uk_channel{
-	int channel_id;
-	int reserved;
-	char buf[3*1024];
-	int len;
+		 int channel_id;
+		 int reserved;
+		 char buf[3*1024];
+		 int len;
 };
 
 
@@ -50,6 +50,8 @@ void sendnlmsg(char *message)
 	netlink_unicast(nl_sk, skb_1, pid, MSG_DONTWAIT);
 
 }
+
+
 void nl_data_ready(struct sk_buff *__skb)
 {
 	struct sk_buff *skb;
@@ -66,6 +68,7 @@ void nl_data_ready(struct sk_buff *__skb)
 
 }
 
+
 int netlink_init(void)
 {
 
@@ -77,18 +80,17 @@ int netlink_init(void)
 
 	nl_sk = netlink_kernel_create(&init_net, NETLINK_TEST, &netlink_cfg);
 
-	if (!nl_sk)  {
+	if (!nl_sk) {
 		printk(KERN_ERR "my_net_link: create netlink socket error.\n");
 		return 1;
 	}
-
 	return 0;
 }
 
 void netlink_exit(void)
 {
-	if (nl_sk != NULL)  {
-		sock_release(nl_sk->sk_socket);
+	if (nl_sk != NULL) {
+		 sock_release(nl_sk->sk_socket);
 	}
 
 	printk("my_net_link: self module exited\n");
