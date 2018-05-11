@@ -1989,8 +1989,12 @@ in_rq_range(struct usb_function *fn, const struct usb_ctrlrequest *cr)
 
 	pr_debug("%s: entity_id:%u\n", __func__, entity_id);
 	if (control_selector == UAC2_CS_CONTROL_SAM_FREQ) {
+<<<<<<< HEAD
 
 		if (entity_id == USB_IN_CLK_ID || USB_OUT_CLK_ID) {
+=======
+		if (entity_id == USB_IN_CLK_ID || entity_id == USB_OUT_CLK_ID) {
+>>>>>>> bcd8b491ee50... usb: gadget: f_uac2: Fix constant logical operand warning
 			int i;
 
 			r.wNumSubRanges = CLK_FREQ_ARR_SIZE;
