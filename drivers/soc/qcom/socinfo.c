@@ -1608,6 +1608,8 @@ int __init socinfo_init(void)
 	if (IS_ERR_OR_NULL(socinfo)) {
 		pr_warn("Can't find SMEM_HW_SW_BUILD_ID; falling back on dummy values.\n");
 		socinfo = setup_dummy_socinfo();
+	} else {
+		socinfo->v0_3.hw_platform = HW_PLATFORM_QRD;
 	}
 
 	socinfo_select_format();
