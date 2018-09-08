@@ -1848,7 +1848,6 @@ static int fastrpc_file_free(struct fastrpc_file *fl)
 				fastrpc_channel_close, &fl->apps->smd_mutex);
 
 bail:
-	mutex_destroy(&fl->map_mutex);
 	kfree(fl);
 	return 0;
 }

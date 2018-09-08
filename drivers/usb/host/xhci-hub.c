@@ -313,10 +313,6 @@ static int xhci_stop_device(struct xhci_hcd *xhci, int slot_id, int suspend)
 	ret = xhci_queue_stop_endpoint(xhci, cmd, slot_id, 0, suspend);
 	if (ret) {
 		spin_unlock_irqrestore(&xhci->lock, flags);
-		goto err_cmd_queue;
-	}
-
-		goto cmd_cleanup;
 	}
 
 	xhci_ring_cmd_db(xhci);

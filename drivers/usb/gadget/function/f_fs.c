@@ -919,7 +919,8 @@ retry:
 
 			if (unlikely(ret < 0)) {
 				ret = -EIO;
-			} else if (unlikely(wait_for_completion_interruptible_timeout(done, 10*HZ) <= 0)) {
+			} else if (unlikely(
+				   wait_for_completion_interruptible(done))) {
 				spin_lock_irq(&epfile->ffs->eps_lock);
 				/*
 				 * While we were acquiring lock endpoint got
@@ -1611,9 +1612,6 @@ static void ffs_data_clear(struct ffs_data *ffs)
 			ffs->gadget, ffs->flags);
 
 	ffs_closed(ffs);
-
-	if (test_bit(FFS_FL_BOUND, &ffs->flags))
-		ffs_closed(ffs);
 
 	/* Dump ffs->gadget and ffs->flags */
 	if (ffs->gadget)
@@ -2886,8 +2884,6 @@ static int _ffs_func_bind(struct usb_configuration *c,
 	struct ffs_data *ffs = func->ffs;
 
 	const int full = !!func->ffs->fs_descs_count;
-	const int high = func->ffs->hs_descs_count;
-	const int super = func->ffs->ss_descs_count;
 	const int high = !!func->ffs->hs_descs_count;
 	const int super = !!func->ffs->ss_descs_count;
 
@@ -3610,12 +3606,6 @@ static void ffs_closed(struct ffs_data *ffs)
 	    || !atomic_read(&opts->func_inst.group.cg_item.ci_kref.refcount))
 		goto done;
 
-	ci = opts->func_inst.group.cg_item.ci_parent->ci_parent;
-	ffs_dev_unlock();
-
-	if (test_bit(FFS_FL_BOUND, &ffs->flags))
-		unregister_gadget_item(ci);
-	return;
 done:
 	ffs_dev_unlock();
 }
