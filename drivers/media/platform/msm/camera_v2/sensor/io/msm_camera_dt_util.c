@@ -1220,8 +1220,6 @@ static int msm_camera_pinctrl_init(struct msm_camera_power_ctrl_t *ctrl)
 	return 0;
 }
 
-<<<<<<< HEAD
-=======
 int msm_cam_sensor_handle_reg_gpio(int seq_val,
 	struct msm_camera_gpio_conf *gconf, int val) {
 
@@ -1291,7 +1289,6 @@ int32_t msm_sensor_driver_get_gpio_data(
 		return -EINVAL;
 	}
 
-	gpio_array_size = of_gpio_count(of_node);
 	CDBG("gpio count %d\n", gpio_array_size);
 	if (gpio_array_size <= 0)
 		return -ENODEV;
@@ -1308,7 +1305,6 @@ int32_t msm_sensor_driver_get_gpio_data(
 		goto FREE_GPIO_CONF;
 
 	for (i = 0; i < gpio_array_size; i++) {
-		gpio_array[i] = of_get_gpio(of_node, i);
 		CDBG("gpio_array[%d] = %d", i, gpio_array[i]);
 	}
 
@@ -1319,8 +1315,6 @@ int32_t msm_sensor_driver_get_gpio_data(
 		goto FREE_GPIO_CONF;
 	}
 
-	rc = msm_camera_get_dt_gpio_set_tbl(of_node, gconf,
-		gpio_array, gpio_array_size);
 	if (rc < 0) {
 		pr_err("%s failed %d\n", __func__, __LINE__);
 		goto FREE_GPIO_REQ_TBL;
@@ -1343,7 +1337,6 @@ FREE_GPIO_CONF:
 	return rc;
 }
 
->>>>>>> 2da23808dccf... msm: camera: Remove unnecessary parentheses
 int msm_camera_power_up(struct msm_camera_power_ctrl_t *ctrl,
 	enum msm_camera_device_type_t device_type,
 	struct msm_camera_i2c_client *sensor_i2c_client)

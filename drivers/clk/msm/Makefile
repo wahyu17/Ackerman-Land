@@ -18,12 +18,11 @@ obj-$(CONFIG_ARCH_MSM8996)	+= clock-mmss-8996.o
 obj-$(CONFIG_ARCH_MSM8996)	+= clock-cpu-8996.o
 obj-$(CONFIG_ARCH_MSMCOBALT)	+= clock-osm.o
 
-<<<<<<< HEAD
 # MSM COBALT
 obj-$(CONFIG_ARCH_MSMCOBALT)	+= clock-gcc-cobalt.o
 obj-$(CONFIG_ARCH_MSMCOBALT)	+= clock-gpu-cobalt.o
 obj-$(CONFIG_ARCH_MSMCOBALT)	+= clock-mmss-cobalt.o
-=======
+
 # MSM 8996
 obj-$(CONFIG_ARCH_MSM8996)	+= clock-gcc-8996.o
 obj-$(CONFIG_ARCH_MSM8996)	+= clock-mmss-8996.o
@@ -32,7 +31,6 @@ obj-$(CONFIG_ARCH_MSMCOBALT)	+= clock-osm.o
 
 # MDM9640
 obj-$(CONFIG_ARCH_MDM9640)	+= clock-a7.o
->>>>>>> 6a5f155adf93... clk: msm: Disable literal-conversion Clang warning
 
 # MDM9650
 obj-$(CONFIG_ARCH_MDM9650)	+= clock-gcc-9650.o

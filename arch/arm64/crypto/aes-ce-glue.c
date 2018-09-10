@@ -34,6 +34,8 @@ asmlinkage u32 __aes_ce_sub(u32 l);
 asmlinkage void __aes_ce_invert(struct aes_block *out,
 				const struct aes_block *in);
 
+asmlinkage void __aes_sub(u32 input);
+
 static int num_rounds(struct crypto_aes_ctx *ctx)
 {
 	/*
@@ -74,31 +76,6 @@ static void aes_cipher_decrypt(struct crypto_tfm *tfm, u8 dst[], u8 const src[])
 	kernel_neon_end();
 }
 
-<<<<<<< HEAD:arch/arm64/crypto/aes-ce-cipher.c
-<<<<<<< HEAD
-=======
-/*
- * aes_sub() - use the aese instruction to perform the AES sbox substitution
- *             on each byte in 'input'
- */
-static u32 aes_sub(u32 input)
-{
-	u32 ret;
-
-	__asm__("dup	v1.4s, %w[in]		;"
-		"movi	v0.16b, #0		;"
-		"aese	v0.16b, v1.16b		;"
-		"umov	%w[out], v0.4s[0]	;"
-
-	:	[out]	"=r"(ret)
-	:	[in]	"r"(input)
-	:		"v0","v1");
-
-	return ret;
-}
-
-=======
->>>>>>> b5babbbe7893... UPSTREAM: crypto: arm64/aes-ce-cipher - move assembler code to .S file:arch/arm64/crypto/aes-ce-glue.c
 int ce_aes_expandkey(struct crypto_aes_ctx *ctx, const u8 *in_key,
 		     unsigned int key_len)
 {
@@ -182,7 +159,6 @@ int ce_aes_setkey(struct crypto_tfm *tfm, const u8 *in_key,
 }
 EXPORT_SYMBOL(ce_aes_setkey);
 
->>>>>>> 43c928c086f8... UPSTREAM: crypto: arm64/aes-ce - fix for big endian
 static struct crypto_alg aes_alg = {
 	.cra_name		= "aes",
 	.cra_driver_name	= "aes-ce",

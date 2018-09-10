@@ -26,11 +26,5 @@ obj-$(CONFIG_QPNP_VIBRATOR) += qpnp-vibrator.o
 obj-$(CONFIG_MSM_AVTIMER) += avtimer.o
 obj-$(CONFIG_MSM_11AD) += msm_11ad/
 obj-$(CONFIG_MSM_MHI_DEV) += mhi_dev/
-<<<<<<< HEAD
 obj-$(CONFIG_SSM) += ssm.o
-=======
-<<<<<<< HEAD
-=======
 obj-$(CONFIG_SSM) += ssm.o
->>>>>>> 55195b50df8e... usb: bam: Disable enum-conversion warning
->>>>>>> 665719b22f21... usb: bam: Disable enum-conversion warning

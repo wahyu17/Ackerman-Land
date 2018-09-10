@@ -643,11 +643,8 @@ KBUILD_CFLAGS	+= $(call cc-option,-fno-PIE)
 KBUILD_AFLAGS	+= $(call cc-option,-fno-PIE)
 
 ifdef CONFIG_CC_OPTIMIZE_FOR_SIZE
-<<<<<<< HEAD
 KBUILD_CFLAGS	+= -Os $(call cc-disable-warning,maybe-uninitialized,)
-=======
 KBUILD_CFLAGS	+= $(call cc-option,-Oz,-Os) $(call cc-disable-warning,maybe-uninitialized,)
->>>>>>> 24cc7830d923... BACKPORT: kbuild: use -Oz instead of -Os when using clang
 else
 KBUILD_CFLAGS	+= -O2
 endif
@@ -718,7 +715,6 @@ ifdef CONFIG_KCOV
   endif
 endif
 
-<<<<<<< HEAD
 ifeq ($(cc-name),clang)
 ifneq ($(CROSS_COMPILE),)
 CLANG_TARGET	:= -target $(notdir $(CROSS_COMPILE:%-=%))
@@ -753,8 +749,6 @@ endif
 # transport MTK_CDEFS ( mtk compile macros ) to .c for compile
 KBUILD_CFLAGS += $(MTK_CDEFS)
 
-=======
->>>>>>> 16857dad5794... BACKPORT: kbuild: Set KBUILD_CFLAGS before incl. arch Makefile
 ifdef CONFIG_FRAME_POINTER
 KBUILD_CFLAGS	+= -fno-omit-frame-pointer -fno-optimize-sibling-calls
 else
